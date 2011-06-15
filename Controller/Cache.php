@@ -1,6 +1,6 @@
 <?php
 
-namespace Allblacks\ApcBundle\Controller;
+namespace Kelu95\ApcBundle\Controller;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

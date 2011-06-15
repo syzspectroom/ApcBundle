@@ -1,6 +1,6 @@
 <?php
 
-namespace Allblacks\ApcBundle;
+namespace Kelu95\ApcBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

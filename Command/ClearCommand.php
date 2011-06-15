@@ -5,7 +5,7 @@
 * Copyright (c) 2011 Luc Vandesype - http://www.neoplug.com
 */
 
-namespace Allblacks\ApcBundle\Command;
+namespace Kelu95\ApcBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputArgument;
