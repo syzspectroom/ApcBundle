@@ -68,13 +68,11 @@ To start using the bundle, initialize the bundle in your Kernel:
 	        class: Kelu95\ApcBundle\Controller\Cache
 	        arguments: [@doctrine,%apc_enabled%,%apc_ttl%]
 
-
 ### Add this parameters to your parameters
-	
 	//app\config\config.yml
 	parameters:
 		// ...
 		apc_enabled=true
     	apc_ttl=1800 
 
-	apc_ttl is the default time to live, in second. 1800 : 30 minutes
+apc_ttl is the default time to live, in second. 1800 : 30 minutes
