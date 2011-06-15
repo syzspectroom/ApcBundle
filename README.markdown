@@ -49,7 +49,8 @@ need to add the `Kelu95` namespace to your autoloader:
 ### Initialize the bundle
 
 To start using the bundle, initialize the bundle in your Kernel:
-
+	
+	// app/AppKernel.php
     public function registerBundles()
     {
         $bundles = array(
@@ -58,8 +59,21 @@ To start using the bundle, initialize the bundle in your Kernel:
         );
     )
 
-### Add this parameters to your parameters (usually app\config\config.yml)
+### Declare the service
+
+To start using the bundle, initialize the bundle in your Kernel:
 	
+	//app/config.yml
+	services: 
+		// ...
+	    apc_cache:
+	        class: Kelu95\ApcBundle\Controller\Cache
+	        arguments: [@doctrine,%apc_enabled%,%apc_ttl%]
+
+
+### Add this parameters to your parameters
+	
+	//app\config\config.yml
 	parameters:
 		// ...
 		apc_enabled=true
