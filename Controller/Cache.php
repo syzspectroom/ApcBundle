@@ -18,19 +18,16 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Cache
 {
-	protected $em; //entity manager service
 	protected $apc_enabled; //conf parameter value
 	protected $apc_ttl;  //conf parameter value
 	protected $cache_name;  //var cache name for instance
 	
 	/**
-	 * @param object $em (entity manager service)
 	 * @param int $apc_enabled (conf parameter value)
 	 * @param int $apc_ttl (conf parameter default time to leave)
 	 */
-	public function __construct($em,$apc_enabled,$apc_ttl)
+	public function __construct($apc_enabled,$apc_ttl)
     {
-        $this->em=$em->getEntityManager();
 		$this->apc_enabled=$apc_enabled;
 		$this->apc_ttl=$apc_ttl;
 		

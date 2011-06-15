@@ -66,7 +66,7 @@ To start using the bundle, initialize the bundle in your Kernel:
 		// ...
 	    apc_cache:
 	        class: Kelu95\ApcBundle\Controller\Cache
-	        arguments: [@doctrine,%apc_enabled%,%apc_ttl%]
+	        arguments: [%apc_enabled%,%apc_ttl%]
 
 ### Add this parameters to your parameters
 	//app\config\config.yml
