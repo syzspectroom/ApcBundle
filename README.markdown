@@ -2,13 +2,20 @@ ApcBundle - A bundle to use and manage APC cache for Symfony2 project
 =====================================================================
 
 The ApcBundle provides service to set/get/delete and more PHP APC Cache.
+This bundle now provide a twig extension to manage cache from template
 
-	Basic example :	
+PHP example :	
 	$cache = $this->get('apc_cache');
 	if(!$cache->exist('my_cache_var')){
 		$cache->add('my_cache_value', [ int $ttl ]);
 	}
 	echo $cache->get();
+
+TWIG example :	
+  	{% if not cache('my_cache_var') %}
+ 		my renderer html code
+  	{% endif %}
+ 	{{ cache_save()|raw }}
 
 
 The ApcBundle also provides a command to clear APC cache from CLI.
