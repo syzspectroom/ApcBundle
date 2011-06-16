@@ -127,9 +127,15 @@ class Cache
      */
 	private function isApcEnabled()
 	{
-		if(function_exists('apc_add') && $this->apc_enabled==1){
+		if($this->apc_enabled!=1){
+			//don't show execption in that case
+			return false;
+		}
+		
+		if(function_exists('apc_add')){
 			return true;
 		}
+		
 		throw new \Exception("The APC Extension is not enabled.\nPlease, check your server configuration.\nThe parameter \"apc_enabled\" must set to true\nThe parameter \"apc_ttl\" must be int val");
 		return false;
 	}
