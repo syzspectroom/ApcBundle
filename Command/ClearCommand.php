@@ -27,17 +27,11 @@ class ClearCommand extends BaseCommand
     protected function configure()
     {
         $this
-            ->setName('apc:clear')
-            ->setDescription('Clear all APC cache user or filehits')
-            ->setDefinition(array(
-                new InputArgument('type', InputArgument::REQUIRED, 'The cache type (user or file)')
-           ))
-            ->setHelp(<<<EOT
-The <info>apc:clear</info> command that clear all APC cache :
-<info>php app/console apc:clear type</info>
-The type argument is required
-EOT
-            );
+            ->setDefinition(array())
+			->setDescription('Clear all APC cache user or opcode')
+            ->addOption('opcode', null, InputOption::VALUE_NONE, 'Clear opcode cache')
+            ->addOption('user', null, InputOption::VALUE_NONE, 'Clear user cache')
+            ->setName('apc:clear');
     }
 
     /**
@@ -45,43 +39,27 @@ EOT
 	*/
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-		$logger = $this->container->get('logger'); //get logger service
+		if(!$input->getOption('user') && !$input->getOption('opcode')){
+			$output->writeln('Error : Cache type option must be --user or --opcode');
+			return;
+		}
 		
-		$cache_type=''; //empty for filehits
-		if($input->getArgument('type')=='user') $cache_type='user';
-
+		//Define cache type from passed option
+		if($input->getOption('user')) $cache_type="user";
+		else if($input->getOption('opcode')) $cache_type="opcode";
+		
     	$cache = $this->container->get('apc_cache'); //get apc_cache service
-		$cache->clearAll($cache_type);
+		$cache->clearAll($cache_type); //clear
 		
-		$output_str='APC clear all cache '.$input->getArgument('type').' from HOST : '.gethostname();
+		//output + logger
+		$output_str='APC clear all cache '.$cache_type.' from HOST : '.gethostname();
 		
+		$logger = $this->container->get('logger'); //get logger service
 		$logger->info($output_str);
+		
         $output->writeln($output_str);
     }
 	
-	/**
-	* @see Command
-	*/
-    protected function interact(InputInterface $input, OutputInterface $output)
-    {
-    	$logger = $this->container->get('logger');
-
-    	if (!$input->getArgument('type')) {
-            $type = $this->getHelper('dialog')->askAndValidate(
-                $output,
-                'Please specify the cache to clear [user or file]:',
-                function($type)
-                {
-                    if (empty($type) || ($type!='user' && $type!='file')) {
-                        throw new \Exception('Cache type must be user our file');
-                    }
-
-                    return $type;
-                }
-            );
-            $input->setArgument('type', $type);
-        }
-    }
-
+	
 }
 

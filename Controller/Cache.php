@@ -102,15 +102,15 @@ class Cache
 	 /**
 	 * Delete cache user or filehits
 	 * 
-	 * @param string $cache_type user or empty
+	 * @param string $cache_type user or opcode
 	 */
-	public function clearAll($cache_type='')
+	public function clearAll($cache_type='user')
 	{
 		apc_clear_cache($cache_type);
 	}
 	
 	 /**
-     * Get apc cache infos by type (user or filehits)
+     * Get apc cache infos by type
 	 * 
 	 * @param string $cache_type user or empty
 	 * @return array
