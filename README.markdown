@@ -70,7 +70,7 @@ To start using the bundle, initialize the bundle in your Kernel:
 
 ### Declare the service
 
-	//app/config.yml
+	//app/config/config.yml
 	services: 
 		// ...
 	    apc_cache:
@@ -78,7 +78,7 @@ To start using the bundle, initialize the bundle in your Kernel:
 	        arguments: [%apc_enabled%,%apc_ttl%]
 
 ### Add this parameters to your parameters
-	//app\config\config.yml
+	//app\config\parameters.ini
 	parameters:
 		// ...
 		apc_enabled=true
