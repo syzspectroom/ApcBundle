@@ -7,7 +7,7 @@
 
 namespace Kelu95\ApcBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\Command as BaseCommand;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand as Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,7 +19,7 @@ use Symfony\Component\Console\Output\Output;
 *
 * Lets you clear APC cache user or filehits  
 */
-class ClearCommand extends BaseCommand
+class ClearCommand extends Command
 {
 	/**
 	* @see Command
@@ -48,13 +48,13 @@ class ClearCommand extends BaseCommand
 		if($input->getOption('user')) $cache_type="user";
 		else if($input->getOption('opcode')) $cache_type="opcode";
 		
-    	$cache = $this->container->get('apc_cache'); //get apc_cache service
+    	$cache = $this->getContainer()->get('apc_cache'); //get apc_cache service
 		$cache->clearAll($cache_type); //clear
 		
 		//output + logger
 		$output_str='APC clear all cache '.$cache_type.' from HOST : '.gethostname();
 		
-		$logger = $this->container->get('logger'); //get logger service
+		$logger = $this->getContainer()->get('logger'); //get logger service
 		$logger->info($output_str);
 		
         $output->writeln($output_str);
